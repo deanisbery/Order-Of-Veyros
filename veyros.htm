@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VEYROS | Type Soul Clan</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* BACKGROUND IMAGE */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background-image: url("veyros-bg.png");
+            background-size: cover;
+            background-position: center right;
+            background-repeat: no-repeat;
+
+            z-index: -2;
+        }
+
+        /* Dark overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background: linear-gradient(
+                90deg,
+                rgba(0, 0, 0, 0.95) 0%,
+                rgba(0, 0, 0, 0.82) 35%,
+                rgba(0, 0, 0, 0.25) 100%
+            );
+
+            z-index: -1;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 25px 7%;
+
+            background: rgba(0, 0, 0, 0.75);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(8px);
+
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 8px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+
+            font-size: 13px;
+            letter-spacing: 2px;
+
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #999;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 100px 10%;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .type-soul {
+            font-size: 13px;
+            letter-spacing: 7px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(70px, 12vw, 150px);
+            line-height: 0.9;
+
+            letter-spacing: 15px;
+
+            color: #fff;
+
+            text-shadow:
+                0 0 15px rgba(255,255,255,0.25);
+        }
+
+        .motto {
+            margin-top: 25px;
+
+            font-size: 18px;
+            letter-spacing: 5px;
+
+            color: #ccc;
+        }
+
+        .description {
+            margin-top: 25px;
+
+            max-width: 550px;
+
+            color: #aaa;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* BUTTON */
+
+        .apply-btn {
+            display: inline-block;
+
+            margin-top: 35px;
+            padding: 17px 45px;
+
+            background: #fff;
+            color: #000;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            border: 2px solid #fff;
+
+            transition: 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: transparent;
+            color: #fff;
+
+            box-shadow: 0 0 25px rgba(255,255,255,0.25);
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 100px 10%;
+            background: rgba(0,0,0,0.88);
+        }
+
+        .section-title {
+            font-size: 35px;
+            letter-spacing: 7px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: #777;
+            margin-bottom: 50px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            max-width: 1100px;
+        }
+
+        .card {
+            padding: 35px;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,0.07);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #888;
+            line-height: 1.7;
+        }
+
+        /* REQUIREMENTS */
+
+        .requirements {
+            max-width: 900px;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+
+            padding: 25px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .number {
+            font-size: 18px;
+            color: #555;
+
+            width: 60px;
+        }
+
+        .requirement h3 {
+            letter-spacing: 3px;
+            margin-bottom: 6px;
+        }
+
+        .requirement p {
+            color: #777;
+        }
+
+        /* FINAL APPLY */
+
+        .final {
+            text-align: center;
+            padding: 140px 20px;
+
+            background: rgba(0,0,0,0.95);
+        }
+
+        .final h2 {
+            font-size: 50px;
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+        }
+
+        .final p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            background: #000;
+
+            border-top: 1px solid #222;
+
+            color: #555;
+
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 750px) {
+
+            nav {
+                padding: 20px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 10px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: 7px;
+            }
+
+            .final h2 {
+                font-size: 35px;
+                letter-spacing: 5px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            VEYROS
+        </div>
+
+        <div>
+            <a href="#about">ABOUT</a>
+            <a href="#requirements">REQUIREMENTS</a>
+            <a href="#apply">APPLY</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="type-soul">
+                TYPE SOUL • CLAN
+            </div>
+
+            <h1>VEYROS</h1>
+
+            <div class="motto">
+                ONLY THE WORTHY REMAIN.
+            </div>
+
+            <p class="description">
+                Veyros is a Type Soul clan built around
+                strength, activity, loyalty, and improvement.
+                Prove yourself, earn your place, and fight
+                alongside the clan.
+            </p>
+
+            <a
+                href="https://discord.gg/nq3Q6cYU7Z"
+                target="_blank"
+                class="apply-btn"
+            >
+                APPLY NOW
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <h2 class="section-title">
+            VEYROS
+        </h2>
+
+        <p class="section-subtitle">
+            A clan built through strength and loyalty.
+        </p>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>LOYALTY</h3>
+
+                <p>
+                    Respect your fellow members and
+                    represent Veyros with pride.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>STRENGTH</h3>
+
+                <p>
+                    Improve your skills through PvP,
+                    training, and clan activities.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>ACTIVITY</h3>
+
+                <p>
+                    Stay active and participate in
+                    clan events and activities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REQUIREMENTS -->
+
+    <section id="requirements">
+
+        <h2 class="section-title">
+            REQUIREMENTS
+        </h2>
+
+        <p class="section-subtitle">
+            Before joining Veyros, you must prove yourself.
+        </p>
+
+
+        <div class="requirements">
+
+            <div class="requirement">
+
+                <div class="number">
+                    01
+                </div>
+
+                <div>
+                    <h3>PASS THE TRYOUT</h3>
+
+                    <p>
+                        Applicants must successfully pass
+                        the Veyros tryout.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="requirement">
+
+                <div class="number">
+                    02
+                </div>
+
+                <div>
+                    <h3>BE ACTIVE</h3>
+
+                    <p>
+                        Stay active within the clan and
+                        participate in clan activities.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="requirement">
+
+                <div class="number">
+                    03
+                </div>
+
+                <div>
+                    <h3>RESPECT MEMBERS</h3>
+
+                    <p>
+                        Respect Veyros members and follow
+                        the rules of the clan.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="requirement">
+
+                <div class="number">
+                    04
+                </div>
+
+                <div>
+                    <h3>HAVE DISCORD</h3>
+
+                    <p>
+                        Applicants must be in the official
+                        Veyros Discord server.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="requirement">
+
+                <div class="number">
+                    05
+                </div>
+
+                <div>
+                    <h3>BE WILLING TO IMPROVE</h3>
+
+                    <p>
+                        Be willing to learn, train, and
+                        improve your Type Soul skills.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPLY -->
+
+    <section class="final" id="apply">
+
+        <h2>PROVE YOUR WORTH.</h2>
+
+        <p>
+            Think you have what it takes to join Veyros?
+        </p>
+
+        <a
+            href="https://discord.gg/nq3Q6cYU7Z"
+            target="_blank"
+            class="apply-btn"
+        >
+            ENTER VEYROS
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        VEYROS • TYPE SOUL CLAN • 2026
+
+    </footer>
+
+</body>
+</html>
